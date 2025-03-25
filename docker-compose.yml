@@ -1,0 +1,27 @@
+version: "3"
+
+services: # nom des services en minuscules
+  monapp:
+    build:
+      context: .  # rep qui contient Dockerfile
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - 8080:8080 #machine:conteneur
+    #environment:  # variable d'env du conteneur si ya
+      
+    depends_on: # indique le DB doit être UP avant de lancer le conteneur
+      - mysqldb
+
+  mysqldb: # alias réseau, 
+    image: mysql:8.0  #image à lancerports:
+    ports:
+      - 3306:3306
+    volumes: # on ne peut écrire pas dans un conteneur => allow un volume
+      - msg-mysql-data:/var/lib/mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: rootSecret
+      MYSQL_DATABASE: nomBase
+
+volumes:  # volume persistant
+  msg-mysql-data:
