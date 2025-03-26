@@ -1,7 +1,5 @@
 package edu.esiea.YelpEaBack.Services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +15,17 @@ public class AdminService {
 	public AdminService(AdminRepository repo) {
 		this.repo = repo ;
 	}
-	
-	public List<Admin> getAll() {
-		return repo.findAll();
+		
+	//créer un admin 
+	public Admin createAdmin(Admin admin) {
+		return repo.save(admin);
 	}
 	
-	public Admin get(int id) {
-		return repo.findById(id).orElseThrow(() -> new RuntimeException("Admin not found"));
+    //supprimer un admin
+	public void deleteAdmin(int id) {
+		if (!repo.existsById(id)) {
+			throw new RuntimeException("Admin not found");
+		}
+		repo.deleteById(id);
 	}
-	
-	
-
 }

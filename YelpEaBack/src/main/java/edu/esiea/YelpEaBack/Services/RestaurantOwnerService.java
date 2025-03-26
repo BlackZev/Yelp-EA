@@ -19,12 +19,25 @@ public class RestaurantOwnerService {
 		this.repo = repo ;
 	}
 	
+	//récupérer tous les propriétaire de resto
 	public List<RestaurantOwner> getAll() {
 		return repo.findAll();
 	}
 	
-	public RestaurantOwner get(int id) {
-		return repo.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
+	
+	// Creation d'un propriétaire de resto
+	public RestaurantOwner create(RestaurantOwner restaurantOwner) {
+		return repo.save(restaurantOwner);
 	}
+	
+	//suppression d'un propriétaire de resto 
+
+    public void delete(int id) {
+        if (!repo.existsById(id)) {
+            throw new RuntimeException("Restaurant Owner not found");
+        }
+        repo.deleteById(id);
+    }
+	
 
 }

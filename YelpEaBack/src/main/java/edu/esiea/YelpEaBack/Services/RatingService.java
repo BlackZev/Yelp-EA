@@ -1,7 +1,5 @@
 package edu.esiea.YelpEaBack.Services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +15,27 @@ public class RatingService {
 	public RatingService(RatingRepository repo) {
 		this.repo = repo ;
 	}
-	
-	public List<Rating> getAll() {
-		return repo.findAll();
-	}
-	
-	public Rating get(int id) {
-		return repo.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
-	}
 
+	// Creation de la Note
+	public Rating create(Rating rating) {
+		return repo.save(rating);
+	}
+	
+	// Mise à jour de la Note
+    public Rating update(int id, Rating updatedRating) {
+        Rating rating = repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Rating not found"));
+        rating.setValue(updatedRating.getValue());
+        return repo.save(rating);
+    }
+    
+    // Suppression Note
+    public void delete(int id) {
+        if (!repo.existsById(id)) {
+            throw new RuntimeException("Rating not found");
+        }
+        repo.deleteById(id);
+    }
+
+	
 }

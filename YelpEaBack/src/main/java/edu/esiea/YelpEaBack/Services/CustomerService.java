@@ -18,12 +18,27 @@ public class CustomerService {
 		this.repo = repo ;
 	}
 	
-	public List<Customer> getAll() {
+	// récupérer tous les Customers
+	public List<Customer> getAllCustomer() {
 		return repo.findAll();
 	}
 	
-	public Customer get(int id) {
+	// récuperer un Customer par son id 
+	public Customer getCustomerbyId(int id) {
 		return repo.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
 	}
 
+	// créer un Customer 
+	public Customer createCustomer (Customer customer) {
+		return repo.save(customer);
+	}
+
+	// Supprimer un Customer 
+	public void deleteCustomer(int id) {
+		if (!repo.existsById(id)) {
+			throw new RuntimeException("Customer not found");
+		}
+		repo.deleteById(id);
+	}
 }
+

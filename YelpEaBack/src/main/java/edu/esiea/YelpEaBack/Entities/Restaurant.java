@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.esiea.YelpEaBack.Enum.TypeRestauEnum;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Restaurant {
@@ -21,6 +23,8 @@ public class Restaurant {
 	private String phone;
 	private String description;
 	private TypeRestauEnum type;
+	
+	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Rating> ratings;
 	
 	
@@ -32,11 +36,6 @@ public class Restaurant {
         this.type = type;
         this.ratings = new ArrayList<>();
     }
-    
-    
-    //méthode d'ajout d'une note 
-    
-    //méthode de calcul de la moyenne 
     
     // Getters et setters pour les informations du restaurant
     public String getName() {
@@ -79,6 +78,9 @@ public class Restaurant {
         this.type = type;
     }
     
+    public List<Rating> getRatings(){
+    	return ratings;
+    }
     
 	
 	
