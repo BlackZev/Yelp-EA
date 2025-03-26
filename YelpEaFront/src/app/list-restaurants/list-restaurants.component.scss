@@ -1,0 +1,64 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.mat-mdc-card {
+    max-width: 90%;
+    min-width: 18rem; /* Empêche la carte de devenir trop petite */
+    width: 28rem;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(120deg, #F59E00, #18294A);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    color: black
+}
+
+.mat-mdc-card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+.mat-mdc-card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.mat-mdc-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.mat-mdc-card-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.globalNote {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
