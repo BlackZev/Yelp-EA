@@ -15,7 +15,10 @@ public class Admin extends User {
 	
 	public Admin(String username, String password) {
 		super(username, password);
-
 	}
+	
+	// méthode de suppression d'un User et des notes lié a l'utilisateur et recalculer la moyenne 
+	
+	// méthode de suppression d'un restaurant et de toutes les notes lié au restp 
 
 }

@@ -9,9 +9,12 @@ public abstract class User {
     	this.password = password;
     }
     
-    // méthode de login
-   public String getUsername() {
+    public String getUsername() {
     	return username;
     }
+    
+    
+    // méthode de login
+
 
 }
