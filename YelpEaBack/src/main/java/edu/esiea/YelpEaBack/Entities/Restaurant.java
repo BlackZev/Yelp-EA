@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.esiea.YelpEaBack.Enum.TypeRestauEnum;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Restaurant {
@@ -23,9 +22,10 @@ public class Restaurant {
 	private String phone;
 	private String description;
 	private TypeRestauEnum type;
-	
-	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Rating> ratings;
+	
+	@Transient
+	private double avg;
 	
 	
     public Restaurant(String name, String address, String phone, String description, TypeRestauEnum type) {
@@ -80,6 +80,15 @@ public class Restaurant {
     
     public List<Rating> getRatings(){
     	return ratings;
+    }
+    
+    
+    public void setAvg(double avg) {
+        this.avg = avg;
+    }
+    
+    public double getAvg() {
+    	return avg;
     }
     
 	

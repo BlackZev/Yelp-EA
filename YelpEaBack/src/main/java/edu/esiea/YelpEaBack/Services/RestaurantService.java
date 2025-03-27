@@ -1,7 +1,6 @@
 package edu.esiea.YelpEaBack.Services;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +20,18 @@ public class RestaurantService {
 	
 	// récupérer tous les resto
 	public List<Restaurant> getAll() {
-		return repo.findAll();
+	    List<Restaurant> restaurants = repo.findAll();
+	    for (Restaurant r : restaurants) {
+	        calculateAverageRating(r);
+	    }
+	    return restaurants;
 	}
 	
 	// récupérer un resto précis 
 	public Restaurant get(int id) {
-		return repo.findById(id).orElseThrow(() -> new RuntimeException("Customer not found"));
+		Restaurant r = repo.findById(id).orElse(null);
+		calculateAverageRating(r);
+		return r;
 	}
 	
 	// Créer un restaurant
@@ -56,16 +61,15 @@ public class RestaurantService {
 		
 	// Calculer la moyenne des ratings d'un restaurant
 	
-	public double calculateAverageRating(int id) {
-		Restaurant restaurant = get(id);
-		List<Rating> ratings = restaurant.getRatings();
+	public void calculateAverageRating(Restaurant r) {
+		List<Rating> ratings = r.getRatings();
 		if (ratings == null || ratings.isEmpty()) {
-			return 0.0;
+			r.setAvg(0.0); 
 		}
 		double sum = 0.0;
 		for (Rating rate : ratings) {
 			sum += rate.getValue();
 		}
-		return sum / ratings.size();
+		r.setAvg(sum /ratings.size()); 
 	}
 }
