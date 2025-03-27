@@ -1,4 +1,4 @@
-.login {
+.login-form {
     width: 30vw;
     padding: 2em;
     display: flex;
@@ -11,12 +11,12 @@
     backdrop-filter: blur(10px);
 }
 
-.login-title {
+#title {
     font-size: 1.5rem;
     font-weight: bold;
 }
 
-.login-content {
+.login-form .fields {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,11 +24,11 @@
     gap: 1em;
 }
 
-.login-content #login, .login-content #password {
+.fields #field-login, .fields #field-pswd {
     width: 20vw;
 }
 
-.login-footer {
+.footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,7 +36,7 @@
     gap: 1em;
 }
 
-.login-footer #login {
+.footer #login {
     background-color: white;
     width: 10vw;
     border-radius: 2em;
