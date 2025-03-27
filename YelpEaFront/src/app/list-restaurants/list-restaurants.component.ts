@@ -1,20 +1,22 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatSelectModule} from '@angular/material/select';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-list-restaurants',
-  imports: [MatButtonModule, MatCardModule, MatChipsModule, MatSelectModule, MatFormFieldModule, MatProgressBarModule],
+  imports: [MatButtonModule, MatCardModule, MatChipsModule, MatSelectModule, MatIconModule],
   templateUrl: './list-restaurants.component.html',
   styleUrl: './list-restaurants.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class ListRestaurantsComponent {
+  private router = inject(Router)
+
   title = "Mon restaurant"
   categorie = "Ma catégorie"
   description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu posuere massa, id tristique nulla. In interdum auctor nisl sed facilisis. Maecenas quis velit non mi sollicitudin laoreet eu a tortor. Sed maximus sed tortor vel mattis. Ut euismod pellentesque mi, eu lacinia odio congue eu."
@@ -25,4 +27,8 @@ export class ListRestaurantsComponent {
   globalNote = "0/5"
 
   nbCards = 5;
+
+  addRestaurant(){
+    this.router.navigate(['/addRestaurant']);
+  }
 }
