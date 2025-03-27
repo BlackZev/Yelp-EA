@@ -2,45 +2,46 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
     padding: 1rem;
 }
 
-.mat-mdc-card {
-    max-width: 90%;
-    min-width: 18rem; /* Empêche la carte de devenir trop petite */
-    width: 28rem;
+.card {
+    width: 30vw;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(120deg, #F59E00, #18294A);
-    border-radius: 1.5rem;
+    background: linear-gradient(120deg, #F59E0090, #18294A90);
+    border-radius: 2rem;
     padding: 1.5rem;
-    color: black
+    gap: 2em;
 }
 
-.mat-mdc-card-header {
+
+// card-header
+.card-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
-.mat-mdc-card-title {
+.card-title {
     font-size: 1.5rem;
     font-weight: bold;
 }
 
-.mat-mdc-card-content {
+// card-content
+.card-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 0.5rem;
+    gap: 2rem;
     font-size: 1rem;
 }
 
-.contact {
+.card-content .contact {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,7 +49,8 @@
     font-size: 0.9rem;
 }
 
-.mat-mdc-card-footer {
+// card-footer
+.card-footer {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -57,7 +59,7 @@
     flex-wrap: wrap;
 }
 
-.globalNote {
+.card-footer .globalNote {
     font-size: 1.5rem;
     font-weight: bold;
     color: white;
