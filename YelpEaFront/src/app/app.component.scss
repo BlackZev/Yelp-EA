@@ -6,7 +6,7 @@ main {
     gap: 50px;
 }
 
-.mat-toolbar {
+.toolbar {
     display: flex;
     justify-content: center;
     width: 10vw;
@@ -15,4 +15,5 @@ main {
     font-weight: bold;
     color: white;
     background-color: #36A9E1;
+    cursor: pointer;
 }
