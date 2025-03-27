@@ -6,8 +6,8 @@ import { AddRestaurantComponent } from './add-restaurant/add-restaurant.componen
 import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
-    {path: 'restaurants', component:ListRestaurantsComponent},
-    {path: 'addRestaurant', component:AddRestaurantComponent},
+    {path: 'accueil', component:ListRestaurantsComponent},
+    {path: 'accueil/addRestaurant', component:AddRestaurantComponent},
     {path: 'adminpanel', component:AdminPanelComponent},
     {path: 'login', component:LoginComponent},
     {path: '', redirectTo:'restaurants', pathMatch:'full'},

@@ -13,6 +13,6 @@ export class AppComponent {
 
   private router = inject(Router);
   goHome(){
-    this.router.navigate(['/restaurants']);
+    this.router.navigate(['/accueil']);
   }
 }

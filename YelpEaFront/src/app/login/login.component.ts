@@ -32,7 +32,7 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      this.router.navigate(['/restaurants']);
+      this.router.navigate(['/accueil']);
     }  
   }
 }

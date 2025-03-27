@@ -29,6 +29,6 @@ export class ListRestaurantsComponent {
   nbCards = 5;
 
   addRestaurant(){
-    this.router.navigate(['/addRestaurant']);
+    this.router.navigate(['/accueil/addRestaurant']);
   }
 }

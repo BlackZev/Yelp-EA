@@ -36,7 +36,7 @@ export class AddRestaurantComponent {
 
   onSubmit() {
     if (this.addRestaurant.valid) {
-      this.router.navigate(['/restaurants']);
+      this.router.navigate(['/accueil']);
     }  
   }
 }
