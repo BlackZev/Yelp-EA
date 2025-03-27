@@ -10,6 +10,6 @@ export const routes: Routes = [
     {path: 'accueil/addRestaurant', component:AddRestaurantComponent},
     {path: 'adminpanel', component:AdminPanelComponent},
     {path: 'login', component:LoginComponent},
-    {path: '', redirectTo:'restaurants', pathMatch:'full'},
+    {path: '', redirectTo:'login', pathMatch:'full'},
     {path: '**', component:NotFoundComponent}
 ];
