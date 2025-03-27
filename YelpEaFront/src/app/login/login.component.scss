@@ -1,0 +1,43 @@
+.login {
+    width: 30vw;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+    border-radius: 2em;
+    background-color: #ff000020;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.login-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.login-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.login-content #login, .login-content #password {
+    width: 20vw;
+}
+
+.login-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.login-footer #login {
+    background-color: white;
+    width: 10vw;
+    border-radius: 2em;
+}

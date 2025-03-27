@@ -1,1 +1,20 @@
-<p>login works!</p>
+<mat-card class="login">
+    <mat-card-title class="login-title">Se connecter</mat-card-title>
+  
+    <mat-card-content class="login-content">
+        <mat-form-field id="login" appearance="fill">
+            <mat-label>Identifiant</mat-label>
+            <input matInput placeholder="Identifiant">
+        </mat-form-field>
+
+        <mat-form-field id="password" appearance="fill">
+            <mat-label>Mot de passe</mat-label>
+            <input matInput placeholder="Mot de passe">
+        </mat-form-field>
+    </mat-card-content>
+    
+    <mat-card-footer class="login-footer">
+        <mat-checkbox class="remember-me">Se souvenir de moi</mat-checkbox>
+        <button mat-raised-button id="login">Se connecter</button>
+      </mat-card-footer>
+</mat-card>
