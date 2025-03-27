@@ -44,7 +44,7 @@ jobs:
         docker build -t back 
     # docker login -> action
     # run docker push 
-frontend:
+#frontend:
     # install angular 
     # run npm test
     # test selenium
