@@ -1,18 +1,18 @@
 main {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 50px;
 }
 
 .mat-toolbar {
-    margin: 1em;
     display: flex;
     justify-content: center;
     width: 10vw;
     border-radius: 20em;
-    background-color: #36A9E1;
-    color: white;
-    font-weight: bold;
     font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    background-color: #36A9E1;
 }
