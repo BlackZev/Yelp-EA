@@ -32,13 +32,11 @@ public class RestaurantServiceTest {
     // Test de la méthode getAll() : la moyenne des ratings est calculée pour chaque restaurant.
     @Test
     void testGetAll() {
-        // Création d'un restaurant avec un rating
         Restaurant r1 = new Restaurant("Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.Italien);
         Customer dummyCustomer = new Customer(1,"customer", "customerPass");
         Rating rating1 = new Rating(dummyCustomer, r1, 4);
         r1.getRatings().add(rating1);
         
-        // Création d'un restaurant sans rating
         Restaurant r2 = new Restaurant("Resto2", "Address2", "Phone2", "Desc2", TypeRestauEnum.Italien);
         
         List<Restaurant> restaurants = Arrays.asList(r1, r2);
