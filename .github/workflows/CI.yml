@@ -41,7 +41,7 @@ jobs:
     - name: Docker build
       run: |
         cd YelpEaBack
-        docker build -t back 
+        docker build -t back .
     # docker login -> action
     # run docker push 
 
