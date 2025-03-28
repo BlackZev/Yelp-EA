@@ -13,7 +13,13 @@ public class Customer extends User {
 	@GeneratedValue(strategy = GenerationType.AUTO) //Identity
 	int id;
 	
-	public Customer(String username, String password) {
+	public Customer(int id ,String username, String password) {
 		super(username, password);
+		
+		this.id = id;
 	}
+	
+    public int getID() {
+    	return id;
+    }
 }

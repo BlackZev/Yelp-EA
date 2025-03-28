@@ -38,6 +38,10 @@ public class Restaurant {
     }
     
     // Getters et setters pour les informations du restaurant
+    public int getID() {
+    	return id;
+    }
+    
     public String getName() {
         return name;
     }

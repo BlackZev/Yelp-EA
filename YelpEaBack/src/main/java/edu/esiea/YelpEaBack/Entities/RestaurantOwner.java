@@ -30,4 +30,8 @@ public class RestaurantOwner extends User {
 		return restaurants;
 	}
 	
+    // Getter et Setter pour l'id
+    public int getId() {
+        return id;
+    }
 }
