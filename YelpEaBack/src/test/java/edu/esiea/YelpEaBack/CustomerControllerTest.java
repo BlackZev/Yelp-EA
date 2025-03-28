@@ -1,8 +1,6 @@
 package edu.esiea.YelpEaBack;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -19,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -78,7 +75,7 @@ public class CustomerControllerTest {
     @Test
     void testCreateCustomer() throws Exception {
         Customer inputCustomer = new Customer(1, "NewCustomer", "NewPass");
-        Customer createdCustomer = new Customer(1, "NewCustomer", "NewPass");
+        Customer createdCustomer = new Customer(1,"NewCustomer", "NewPass");
         
         when(service.createCustomer(any(Customer.class))).thenReturn(createdCustomer);
         
@@ -91,7 +88,8 @@ public class CustomerControllerTest {
         
         verify(service, times(1)).createCustomer(any(Customer.class));
     }
-
+    
+    
     //Test Delete
     @Test
     void testDeleteCustomer() throws Exception {

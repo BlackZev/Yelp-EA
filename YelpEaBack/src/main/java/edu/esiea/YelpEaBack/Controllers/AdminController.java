@@ -26,13 +26,13 @@ public class AdminController {
 		this.service = service;
 	}
 	
- @PostMapping
+ @PostMapping("/create")
  public ResponseEntity<Admin> createAdmin(@RequestBody Admin admin){
 	 Admin createdAdmin = service.createAdmin(admin);
 	 return ResponseEntity.ok(createdAdmin);
  }
  
- @DeleteMapping("/{id}")
+ @DeleteMapping("delete/{id}")
  public ResponseEntity<Void> deleteAdmin(@PathVariable int id){
 	 service.deleteAdmin(id);
 	 return ResponseEntity.noContent().build();

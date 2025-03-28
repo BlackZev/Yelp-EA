@@ -33,7 +33,7 @@ public class RestaurantServiceTest {
     @Test
     void testGetAll() {
         Restaurant r1 = new Restaurant("Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.Italien);
-        Customer dummyCustomer = new Customer(1,"customer", "customerPass");
+        Customer dummyCustomer = new Customer(1, "customer", "customerPass");
         Rating rating1 = new Rating(dummyCustomer, r1, 4);
         r1.getRatings().add(rating1);
         
