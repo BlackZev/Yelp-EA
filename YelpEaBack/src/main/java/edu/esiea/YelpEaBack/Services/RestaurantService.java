@@ -65,6 +65,7 @@ public class RestaurantService {
 		List<Rating> ratings = r.getRatings();
 		if (ratings == null || ratings.isEmpty()) {
 			r.setAvg(0.0); 
+			return;
 		}
 		double sum = 0.0;
 		for (Rating rate : ratings) {

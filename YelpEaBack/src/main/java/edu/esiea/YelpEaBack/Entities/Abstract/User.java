@@ -13,8 +13,7 @@ public abstract class User {
     	return username;
     }
     
-    
-    // méthode de login
-
-
+    public String getPassword() {
+    	return password;
+    }
 }

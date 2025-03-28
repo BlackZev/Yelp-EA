@@ -91,9 +91,4 @@ public class Restaurant {
     	return avg;
     }
     
-	
-	
-	
-	
-
 }
