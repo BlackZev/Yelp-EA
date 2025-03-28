@@ -35,7 +35,6 @@ public class Restaurant {
         this.description = description;
         this.type = type;
         this.ratings = new ArrayList<>();
-        
     }
     
     // Getters et setters pour les informations du restaurant
@@ -92,9 +91,4 @@ public class Restaurant {
     	return avg;
     }
     
-	
-	
-	
-	
-
 }
