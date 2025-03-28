@@ -1,0 +1,20 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <p id="title">Se connecter</p>
+
+    <div class="fields">
+        <mat-form-field id="field" for="login" appearance="fill">
+            <mat-label>Identifiant</mat-label>
+            <input matInput id="login" formControlName="login" placeholder="Identifiant">
+        </mat-form-field>
+
+        <mat-form-field id="field" for="pswd" appearance="fill">
+            <mat-label >Mot de passe</mat-label>
+            <input matInput id="pswd" formControlName="pswd" type="password" placeholder="Mot de passe">
+        </mat-form-field>
+    </div>
+    
+    <div class="footer">
+        <mat-checkbox class="remember-me">Se souvenir de moi</mat-checkbox>
+        <button mat-raised-button type="submit" [disabled]="!loginForm.valid" id="login">Se connecter</button>
+    </div>
+</form>

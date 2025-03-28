@@ -1,0 +1,39 @@
+<form [formGroup]="addRestaurant" (ngSubmit)="onSubmit()" class="login-form">
+    <p id="title">Ajouter un restaurant</p>
+
+    <div class="fields">
+        <mat-form-field class="field" for="name" appearance="fill">
+            <mat-label>Nom</mat-label>
+            <input matInput id="name" formControlName="name" placeholder="Nom">
+        </mat-form-field>
+
+        <mat-form-field class="field" for="categorie" appearance="fill">
+            <mat-label>Catégorie</mat-label>
+            <mat-select id="categorie" formControlName="categorie">
+                <mat-option [value]="1">Italien</mat-option>
+                <mat-option [value]="1">Chinois</mat-option>
+                <mat-option [value]="1">Japonais</mat-option>
+                <mat-option [value]="1">FastFood</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="field" for="description" appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput id="description" formControlName="description" placeholder="Description">
+        </mat-form-field>
+
+        <mat-form-field class="field" for="adress" appearance="fill">
+            <mat-label>Addresse</mat-label>
+            <input matInput id="adress" formControlName="adress" placeholder="Addresse">
+        </mat-form-field>
+
+        <mat-form-field class="field" for="phone" appearance="fill">
+            <mat-label>N° de téléphone</mat-label>
+            <input matInput id="phone" formControlName="phone" placeholder="N° de téléphone">
+        </mat-form-field>
+    </div>
+    
+    <div class="footer">
+        <button mat-raised-button type="submit" [disabled]="!addRestaurant.valid" id="login">Ajouter</button>
+    </div>
+</form>
