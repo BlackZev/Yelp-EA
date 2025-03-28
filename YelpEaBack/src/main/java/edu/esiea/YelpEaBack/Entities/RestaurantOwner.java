@@ -21,11 +21,11 @@ public class RestaurantOwner extends User {
 	@OneToMany(mappedBy = "restaurateur", cascade = CascadeType.ALL, orphanRemoval = true )
 	private List<Restaurant> restaurants;
 	
+	
 	public RestaurantOwner(String username, String password) {
 		super(username, password);
 		this.restaurants = new ArrayList<>();
 	}
-	
 	
 	public List<Restaurant> getRestaurants(){
 		return restaurants;
