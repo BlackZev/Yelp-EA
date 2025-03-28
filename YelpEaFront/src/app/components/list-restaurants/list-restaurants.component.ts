@@ -1,10 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { Restaurant } from '../../models/RestaurantModel';
+import { RestaurantsService } from '../../services/restaurants.service';
+
 
 
 @Component({
@@ -14,8 +17,10 @@ import { Router } from '@angular/router';
   styleUrl: './list-restaurants.component.scss',
 })
 
-export class ListRestaurantsComponent {
-  private router = inject(Router)
+export class ListRestaurantsComponent implements OnInit {
+  private router = inject(Router);
+  restaurants: Restaurant[] = [];
+  restaurant: Restaurant = { id: '', name: '', categorie: '', description: '', adress: '', phone: ''}
 
   title = "Mon restaurant"
   categorie = "Ma catégorie"
@@ -26,9 +31,18 @@ export class ListRestaurantsComponent {
   customerNote = "Sélectionnez une note"
   globalNote = "0/5"
 
-  nbCards = 5;
+  constructor(private restaurantService: RestaurantsService) {}
 
   addRestaurant(){
     this.router.navigate(['/accueil/addRestaurant']);
+  }
+
+  getRestaurants(){
+    console.log("Récupération des restaurants")
+    this.restaurantService.getAll().subscribe(data => this.restaurants = data);
+  }
+
+  ngOnInit(): void {
+    this.getRestaurants();
   }
 }

@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { provideHttpClient } from '@angular/common/http';
 import { RouterOutlet, Router } from '@angular/router';
 
 @Component({

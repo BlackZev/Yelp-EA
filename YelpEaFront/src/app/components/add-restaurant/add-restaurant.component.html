@@ -34,6 +34,6 @@
     </div>
     
     <div class="footer">
-        <button mat-raised-button type="submit" [disabled]="!addRestaurant.valid" id="login">Ajouter</button>
+        <button mat-raised-button type="submit" [disabled]="!addRestaurant.valid" id="login" (click)="onSubmit()">Ajouter</button>
     </div>
 </form>

@@ -19,7 +19,7 @@ import edu.esiea.YelpEaBack.Services.RestaurantService;
 
 
 @RestController
-@RequestMapping("/Restaurant")
+@RequestMapping("/restaurant")
 public class RestaurantController {
 	
 	@Autowired
@@ -40,18 +40,18 @@ public class RestaurantController {
         return service.getAll();
     }
 	
-	@GetMapping("/{id}")
+	@GetMapping("/get/{id}")
     public ResponseEntity<Restaurant> getRestaurant(@PathVariable int id) {
         return ResponseEntity.ok(service.get(id));
     }
 	
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Restaurant> updateRestaurant(@PathVariable int id, @RequestBody Restaurant restaurant) {
     	Restaurant updatedRestaurant = service.update(id, restaurant);
         return ResponseEntity.ok(updatedRestaurant);
     }
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteRestaurant(@PathVariable int id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
