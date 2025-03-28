@@ -33,18 +33,18 @@ public class CustomerController {
         return service.getAllCustomer();
     }
 	
-	@GetMapping("/{id}")
+	@GetMapping("/get/{id}")
     public ResponseEntity<Customer> getCustomer(@PathVariable int id) {
         return ResponseEntity.ok(service.getCustomerbyId(id));
     }
 	
-	@PostMapping
+	@PostMapping("/create")
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
         Customer createdCustomer = service.createCustomer(customer);
         return ResponseEntity.ok(createdCustomer);
     }
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable int id) {
         service.deleteCustomer(id);
         return ResponseEntity.noContent().build();
