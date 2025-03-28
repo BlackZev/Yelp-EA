@@ -40,12 +40,12 @@ public class RestaurantController {
         return service.getAll();
     }
 	
-	@GetMapping("/{id}")
+	@GetMapping("/get/{id}")
     public ResponseEntity<Restaurant> getRestaurant(@PathVariable int id) {
         return ResponseEntity.ok(service.get(id));
     }
 	
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Restaurant> updateRestaurant(@PathVariable int id, @RequestBody Restaurant restaurant) {
     	Restaurant updatedRestaurant = service.update(id, restaurant);
         return ResponseEntity.ok(updatedRestaurant);
