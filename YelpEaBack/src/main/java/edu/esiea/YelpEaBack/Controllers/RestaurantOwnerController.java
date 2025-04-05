@@ -40,7 +40,7 @@ public class RestaurantOwnerController {
         return service.getAll();
     }
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteRestaurantOwner(@PathVariable int id) {
         service.delete(id);
         return ResponseEntity.noContent().build();

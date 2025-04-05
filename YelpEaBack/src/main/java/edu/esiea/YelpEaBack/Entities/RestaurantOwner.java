@@ -22,8 +22,9 @@ public class RestaurantOwner extends User {
 	private List<Restaurant> restaurants;
 	
 	
-	public RestaurantOwner(String username, String password) {
+	public RestaurantOwner(int id,String username, String password) {
 		super(username, password);
+		this.id=id;
 		this.restaurants = new ArrayList<>();
 	}
 	

@@ -53,7 +53,7 @@ public class RestaurantController {
         return ResponseEntity.ok(updatedRestaurant);
     }
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteRestaurant(@PathVariable int id) {
         service.delete(id);
         return ResponseEntity.noContent().build();

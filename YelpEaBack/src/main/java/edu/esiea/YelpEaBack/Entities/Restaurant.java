@@ -28,8 +28,9 @@ public class Restaurant {
 	private double avg;
 	
 	
-    public Restaurant(String name, String address, String phone, String description, TypeRestauEnum type) {
-        this.name = name;
+    public Restaurant(int id,String name, String address, String phone, String description, TypeRestauEnum type) {
+        this.id=id;
+    	this.name = name;
         this.address = address;
         this.phone = phone;
         this.description = description;

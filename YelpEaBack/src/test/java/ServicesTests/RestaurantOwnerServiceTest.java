@@ -29,8 +29,8 @@ public class RestaurantOwnerServiceTest {
     @Test
     void testGetAll() {
         // Création d'exemples
-        RestaurantOwner owner1 = new RestaurantOwner("owner1", "pass1");
-        RestaurantOwner owner2 = new RestaurantOwner("owner2", "pass2");
+        RestaurantOwner owner1 = new RestaurantOwner(1,"owner1", "pass1");
+        RestaurantOwner owner2 = new RestaurantOwner(2,"owner2", "pass2");
         List<RestaurantOwner> owners = Arrays.asList(owner1, owner2);
 
         when(repo.findAll()).thenReturn(owners);
@@ -47,7 +47,7 @@ public class RestaurantOwnerServiceTest {
     // Test de création d'un RestaurantOwner
     @Test
     void testCreate() {
-        RestaurantOwner owner = new RestaurantOwner("owner1", "pass1");
+        RestaurantOwner owner = new RestaurantOwner(1,"owner1", "pass1");
         when(repo.save(owner)).thenReturn(owner);
         RestaurantOwner created = service.create(owner);
         assertNotNull(created);
