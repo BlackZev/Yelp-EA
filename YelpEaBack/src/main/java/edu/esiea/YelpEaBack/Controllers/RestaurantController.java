@@ -21,7 +21,7 @@ import edu.esiea.YelpEaBack.Services.RestaurantService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/Restaurant")
+@RequestMapping("/restaurant")
 public class RestaurantController {
 	
 	@Autowired
@@ -35,45 +35,27 @@ public class RestaurantController {
 	 public ResponseEntity<Restaurant> createRestaurant(@RequestBody Restaurant restaurant){
 		 Restaurant createdRestaurant = service.create(restaurant);
 		 return ResponseEntity.ok(createdRestaurant);
-	 }
-	
-	@GetMapping("/all")
-    public List<Restaurant> getAllRestaurant() {
-        return service.getAll();
-    }
-	
-	@GetMapping("/get/{id}")
-    public ResponseEntity<Restaurant> getRestaurant(@PathVariable int id) {
-        return ResponseEntity.ok(service.get(id));
-    }
-	
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Restaurant> updateRestaurant(@PathVariable int id, @RequestBody Restaurant restaurant) {
-    	Restaurant updatedRestaurant = service.update(id, restaurant);
-        return ResponseEntity.ok(updatedRestaurant);
-    }
-	
-	@DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteRestaurant(@PathVariable int id) {
-        service.delete(id);
-        return ResponseEntity.noContent().build();
 	}
 	
+	@GetMapping("/all")
+	public List<Restaurant> getAllRestaurant() {
+        	return service.getAll();
+	}
 	
+	@GetMapping("/get/{id}")
+	public ResponseEntity<Restaurant> getRestaurant(@PathVariable int id) {
+        	return ResponseEntity.ok(service.get(id));
+	}
 	
+	@PutMapping("/update/{id}")
+	public ResponseEntity<Restaurant> updateRestaurant(@PathVariable int id, @RequestBody Restaurant restaurant) {
+		Restaurant updatedRestaurant = service.update(id, restaurant);
+    	return ResponseEntity.ok(updatedRestaurant);
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<Void> deleteRestaurant(@PathVariable int id) {
+        	service.delete(id);
+        	return ResponseEntity.noContent().build();
+	}
 }

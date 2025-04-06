@@ -22,8 +22,4 @@ public class Customer extends User {
     public int getID() {
     	return id;
     }
-	
-	
-	
 }
-		

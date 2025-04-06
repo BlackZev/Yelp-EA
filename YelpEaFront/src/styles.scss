@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 1em;
+    background: linear-gradient(120deg, white, #36A9E1);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}

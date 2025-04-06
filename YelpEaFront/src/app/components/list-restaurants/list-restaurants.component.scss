@@ -1,0 +1,73 @@
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.card {
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(120deg, #F59E0090, #18294A90);
+    border-radius: 2rem;
+    padding: 1.5rem;
+    gap: 2em;
+}
+
+
+// card-header
+.card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+// card-content
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+    font-size: 1rem;
+}
+
+.card-content .contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.9rem;
+}
+
+// card-footer
+.card-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.card-footer .globalNote {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+// button
+#add {
+    border-radius: 1em;
+    color: white;
+    background-color: #F59E0080;
+}

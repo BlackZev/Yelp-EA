@@ -20,14 +20,14 @@ public class RestaurantOwner extends User {
 	
 	@OneToMany(mappedBy = "restaurateur", cascade = CascadeType.ALL, orphanRemoval = true )
 	private List<Restaurant> restaurants;
-	
+
 	
 	public RestaurantOwner(int id,String username, String password) {
 		super(username, password);
 		this.id=id;
 		this.restaurants = new ArrayList<>();
 	}
-	
+
 	public List<Restaurant> getRestaurants(){
 		return restaurants;
 	}
