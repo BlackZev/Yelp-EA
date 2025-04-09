@@ -19,7 +19,7 @@ import edu.esiea.YelpEaBack.Services.RestaurantOwnerService;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/RestaurantOwner")
+@RequestMapping("/restaurantOwner")
 public class RestaurantOwnerController {
 	
 	@Autowired
