@@ -1,6 +1,16 @@
 package edu.esiea.YelpEaBack.Entities.Abstract;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class User {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO) //Identity
+	int id;
 	protected String username;
 	protected String password;
 	
@@ -8,6 +18,12 @@ public abstract class User {
     	this.username = username;
     	this.password = password;
     }
+    
+    
+    public int getId() {
+    	return id;
+    }	
+    
     
     public String getUsername() {
     	return username;

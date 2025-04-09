@@ -42,8 +42,8 @@ public class RatingControllerTest {
 	// Test create
     @Test
     void testCreateRating() throws Exception {
-        Customer testCustomer = new Customer(1, "cust1", "pass1");
-        Restaurant testRestaurant = new Restaurant(1,"Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.FastFood);
+        Customer testCustomer = new Customer("cust1", "pass1");
+        Restaurant testRestaurant = new Restaurant("Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.FastFood);
 
         Rating inputRating = new Rating(testCustomer, testRestaurant, 4);
         Rating createdRating = new Rating(testCustomer, testRestaurant, 4);
@@ -62,8 +62,8 @@ public class RatingControllerTest {
     @Test
     void testUpdateRating() throws Exception {
         int ratingId = 1;
-        Customer testCustomer = new Customer(1, "cust1", "pass1");
-        Restaurant testRestaurant = new Restaurant(1,"Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.FastFood);
+        Customer testCustomer = new Customer("cust1", "pass1");
+        Restaurant testRestaurant = new Restaurant("Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.FastFood);
         
 
         Rating inputRating = new Rating(testCustomer, testRestaurant, 5);

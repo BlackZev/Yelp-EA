@@ -9,21 +9,13 @@ import jakarta.persistence.Id;
 @Entity
 public class Customer extends User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO) //Identity
-	int id;
+
 	
-	public Customer(int id ,String username, String password) {
+	public Customer(String username, String password) {
 		super(username, password);
 		
-		this.id = id;
+
 	}
-	
-    public int getID() {
-    	return id;
-    }
-	
-	
 	
 }
 		

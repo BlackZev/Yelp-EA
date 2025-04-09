@@ -44,9 +44,9 @@ public class RestaurantControllerTest {
     
     @Test
     void testCreateRestaurant() throws Exception {
-        Restaurant inputRestaurant = new Restaurant(1,"Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.Chinois);
+        Restaurant inputRestaurant = new Restaurant("Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.Chinois);
         // Le service retourne le restaurant créé avec un id attribué
-        Restaurant createdRestaurant = new Restaurant(1,"Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.Chinois);
+        Restaurant createdRestaurant = new Restaurant("Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.Chinois);
         
         when(service.create(any(Restaurant.class))).thenReturn(createdRestaurant);
         
@@ -63,8 +63,8 @@ public class RestaurantControllerTest {
  // Test pour getAll
     @Test
     void testGetAllRestaurants() throws Exception {
-        Restaurant restaurant1 = new Restaurant(1,"Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.Chinois);
-        Restaurant restaurant2 = new Restaurant(2,"Resto2", "Address2", "Phone2", "Desc2", TypeRestauEnum.FastFood);
+        Restaurant restaurant1 = new Restaurant("Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.Chinois);
+        Restaurant restaurant2 = new Restaurant("Resto2", "Address2", "Phone2", "Desc2", TypeRestauEnum.FastFood);
 
         
         when(service.getAll()).thenReturn(List.of(restaurant1, restaurant2));
@@ -83,7 +83,7 @@ public class RestaurantControllerTest {
    //test get(id) 
     @Test
     void testGetRestaurant() throws Exception {
-        Restaurant mockedRestaurant = new Restaurant(1,"Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.Japonais);
+        Restaurant mockedRestaurant = new Restaurant("Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.Japonais);
 
         
         when(service.get(1)).thenReturn(mockedRestaurant);
@@ -102,8 +102,8 @@ public class RestaurantControllerTest {
     @Test
     void testUpdateRestaurant() throws Exception {
         int id = 1;
-        Restaurant inputRestaurant = new Restaurant(1,"UpdatedResto", "UpdatedAddress", "UpdatedPhone", "UpdatedDesc", TypeRestauEnum.Italien);
-        Restaurant updatedRestaurant = new Restaurant(1,"UpdatedResto", "UpdatedAddress", "UpdatedPhone", "UpdatedDesc", TypeRestauEnum.Italien);
+        Restaurant inputRestaurant = new Restaurant("UpdatedResto", "UpdatedAddress", "UpdatedPhone", "UpdatedDesc", TypeRestauEnum.Italien);
+        Restaurant updatedRestaurant = new Restaurant("UpdatedResto", "UpdatedAddress", "UpdatedPhone", "UpdatedDesc", TypeRestauEnum.Italien);
 
         
         when(service.update(eq(id), any(Restaurant.class))).thenReturn(updatedRestaurant);

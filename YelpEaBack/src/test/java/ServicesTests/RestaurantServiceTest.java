@@ -32,12 +32,12 @@ public class RestaurantServiceTest {
     // Test de la méthode getAll() : la moyenne des ratings est calculée pour chaque restaurant.
     @Test
     void testGetAll() {
-        Restaurant r1 = new Restaurant(1,"Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.Italien);
-        Customer dummyCustomer = new Customer(1, "customer", "customerPass");
+        Restaurant r1 = new Restaurant("Resto1", "Address1", "Phone1", "Desc1", TypeRestauEnum.Italien);
+        Customer dummyCustomer = new Customer("customer", "customerPass");
         Rating rating1 = new Rating(dummyCustomer, r1, 4);
         r1.getRatings().add(rating1);
         
-        Restaurant r2 = new Restaurant(2,"Resto2", "Address2", "Phone2", "Desc2", TypeRestauEnum.Italien);
+        Restaurant r2 = new Restaurant("Resto2", "Address2", "Phone2", "Desc2", TypeRestauEnum.Italien);
         
         List<Restaurant> restaurants = Arrays.asList(r1, r2);
         when(repo.findAll()).thenReturn(restaurants);
@@ -52,8 +52,8 @@ public class RestaurantServiceTest {
     // Test de la méthode get(int id) qui calcule la moyenne après récupération.
     @Test
     void testGet() {
-        Restaurant r = new Restaurant(1,"Resto", "Address", "Phone", "Desc", TypeRestauEnum.Chinois);
-        Customer dummyCustomer = new Customer(1,"customer", "custommerPass");
+        Restaurant r = new Restaurant("Resto", "Address", "Phone", "Desc", TypeRestauEnum.Chinois);
+        Customer dummyCustomer = new Customer("customer", "custommerPass");
         Rating rating = new Rating(dummyCustomer, r, 5);
         r.getRatings().add(rating);
         
@@ -69,7 +69,7 @@ public class RestaurantServiceTest {
     // Test de la méthode create(Restaurant)
     @Test
     void testCreate() {
-        Restaurant r = new Restaurant(1,"Resto", "Address", "Phone", "Desc", TypeRestauEnum.Chinois);
+        Restaurant r = new Restaurant("Resto", "Address", "Phone", "Desc", TypeRestauEnum.Chinois);
         when(repo.save(r)).thenReturn(r);
         
         Restaurant result = service.create(r);
@@ -81,10 +81,10 @@ public class RestaurantServiceTest {
     // Test de la méthode update(int id, Restaurant)
     @Test
     void testUpdate() {
-        Restaurant existing = new Restaurant(1,"Resto", "Address", "Phone", "Desc", TypeRestauEnum.Chinois);
+        Restaurant existing = new Restaurant("Resto", "Address", "Phone", "Desc", TypeRestauEnum.Chinois);
         when(repo.findById(1)).thenReturn(Optional.of(existing));
         
-        Restaurant updated = new Restaurant(2,"NewResto", "NewAddress", "NewPhone", "NewDesc", TypeRestauEnum.FastFood);
+        Restaurant updated = new Restaurant("NewResto", "NewAddress", "NewPhone", "NewDesc", TypeRestauEnum.FastFood);
         when(repo.save(existing)).thenReturn(existing);
         
         Restaurant result = service.update(1, updated);
@@ -122,11 +122,11 @@ public class RestaurantServiceTest {
     // Test de la méthode calculateAverageRating(Restaurant)
     @Test
     void testCalculateAverageRating() {
-        Restaurant r = new Restaurant(1,"Resto", "Address", "Phone", "Desc", TypeRestauEnum.Chinois);
+        Restaurant r = new Restaurant("Resto", "Address", "Phone", "Desc", TypeRestauEnum.Chinois);
         service.calculateAverageRating(r);
         assertEquals(0.0, r.getAvg());
         
-        Customer dummyCustomer = new Customer(1,"Customer", "CustomerPass");
+        Customer dummyCustomer = new Customer("Customer", "CustomerPass");
         Rating rating1 = new Rating(dummyCustomer, r, 4);
         Rating rating2 = new Rating(dummyCustomer, r, 5);
         r.getRatings().add(rating1);

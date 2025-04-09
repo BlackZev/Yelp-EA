@@ -29,8 +29,8 @@ public class RatingServiceTest {
     // Test de création d'une Rating
     @Test
     void testCreate() {
-        Customer customer = new Customer(1,"customer1", "pass1");
-        Restaurant restaurant = new Restaurant(1,"Resto1", "Address1", "Phone1", "Description1", null);
+        Customer customer = new Customer("customer1", "pass1");
+        Restaurant restaurant = new Restaurant("Resto1", "Address1", "Phone1", "Description1", null);
 
         Rating ratingToCreate = new Rating(customer, restaurant, 4);
 
@@ -46,8 +46,8 @@ public class RatingServiceTest {
     // Test de mise à jour d'une Rating existante
     @Test
     void testUpdate() {
-        Customer customer = new Customer(1,"customer1", "pass1");
-        Restaurant restaurant = new Restaurant(1,"Resto1", "Address1", "Phone1", "Description1", null);
+        Customer customer = new Customer("customer1", "pass1");
+        Restaurant restaurant = new Restaurant("Resto1", "Address1", "Phone1", "Description1", null);
         Rating existingRating = new Rating(customer, restaurant, 3);
 
         when(repo.findById(1)).thenReturn(Optional.of(existingRating));

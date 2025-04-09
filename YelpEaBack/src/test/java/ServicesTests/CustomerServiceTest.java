@@ -30,8 +30,8 @@ public class CustomerServiceTest {
     @Test
     void testGetAllCustomer() {
         // Préparation des données simulées
-        Customer customer1 = new Customer(1,"customer1", "pass1");
-        Customer customer2 = new Customer(2,"customer2", "pass2");
+        Customer customer1 = new Customer("customer1", "pass1");
+        Customer customer2 = new Customer("customer2", "pass2");
         List<Customer> customers = Arrays.asList(customer1, customer2);
         
         when(repo.findAll()).thenReturn(customers);
@@ -51,7 +51,7 @@ public class CustomerServiceTest {
     // Test de récupération d'un Customer par son id
     @Test
     void testGetCustomerbyId() {
-        Customer customer = new Customer(1,"customer1", "pass1");
+        Customer customer = new Customer("customer1", "pass1");
         when(repo.findById(1)).thenReturn(Optional.of(customer));
         
         Customer result = service.getCustomerbyId(1);
@@ -64,7 +64,7 @@ public class CustomerServiceTest {
     // Test de création d'un Customer
     @Test
     void testCreateCustomer() {
-        Customer customer = new Customer(1,"customer1", "pass1");
+        Customer customer = new Customer("customer1", "pass1");
         when(repo.save(customer)).thenReturn(customer);
         
         Customer result = service.createCustomer(customer);

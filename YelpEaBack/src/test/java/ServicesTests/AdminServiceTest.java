@@ -31,8 +31,8 @@ public class AdminServiceTest {
     
     @Test
     void testCreateAdmin() {
-        Admin adminToCreate = new Admin(1,"AdminUser", "AdminPassmord");
-        Admin savedAdmin = new Admin(1,"AdminUser", "AdminPassmord");
+        Admin adminToCreate = new Admin("AdminUser", "AdminPassmord");
+        Admin savedAdmin = new Admin("AdminUser", "AdminPassmord");
         ReflectionTestUtils.setField(savedAdmin, "id", 1);
         
         when(repo.save(adminToCreate)).thenReturn(savedAdmin);
