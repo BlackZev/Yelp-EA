@@ -41,12 +41,12 @@ public class RestaurantOwnerControllerTest {
     //Test Create
     @Test
     void testCreateRestaurantOwner() throws Exception {
-        RestaurantOwner inputOwner = new RestaurantOwner( "owner1", "pass1");
-        RestaurantOwner createdOwner = new RestaurantOwner( "owner1", "pass1");
+        RestaurantOwner inputOwner = new RestaurantOwner("owner1", "pass1");
+        RestaurantOwner createdOwner = new RestaurantOwner("owner1", "pass1");
 
         when(service.create(any(RestaurantOwner.class))).thenReturn(createdOwner);
 
-        mockMvc.perform(post("/RestaurantOwner")
+        mockMvc.perform(post("/restaurantOwner")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(inputOwner)))
             .andExpect(status().isOk())
@@ -60,12 +60,12 @@ public class RestaurantOwnerControllerTest {
     //Test getAll
     @Test
     void testGetAllRestaurantOwners() throws Exception {
-        RestaurantOwner owner1 = new RestaurantOwner( "owner1", "pass1");
-        RestaurantOwner owner2 = new RestaurantOwner( "owner2", "pass2");
+        RestaurantOwner owner1 = new RestaurantOwner("owner1", "pass1");
+        RestaurantOwner owner2 = new RestaurantOwner("owner2", "pass2");
 
         when(service.getAll()).thenReturn(List.of(owner1, owner2));
 
-        mockMvc.perform(get("/RestaurantOwner/all")
+        mockMvc.perform(get("/restaurantOwner/all")
                 .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0].id").value(owner1.getId()))
@@ -82,7 +82,7 @@ public class RestaurantOwnerControllerTest {
     void testDeleteRestaurantOwner() throws Exception {
         int id = 1;
 
-        mockMvc.perform(delete("/RestaurantOwner/delete/{id}", id))
+        mockMvc.perform(delete("/restaurantOwner/delete/{id}", id))
             .andExpect(status().isNoContent());
 
         verify(service, times(1)).delete(id);

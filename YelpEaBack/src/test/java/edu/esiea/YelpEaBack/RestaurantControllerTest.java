@@ -50,7 +50,7 @@ public class RestaurantControllerTest {
         
         when(service.create(any(Restaurant.class))).thenReturn(createdRestaurant);
         
-        mockMvc.perform(post("/Restaurant")
+        mockMvc.perform(post("/restaurant")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(inputRestaurant)))
             .andExpect(status().isOk())
@@ -69,7 +69,7 @@ public class RestaurantControllerTest {
         
         when(service.getAll()).thenReturn(List.of(restaurant1, restaurant2));
         
-        mockMvc.perform(get("/Restaurant/all")
+        mockMvc.perform(get("/restaurant/all")
                 .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0].id").value(restaurant1.getID()))
@@ -88,7 +88,7 @@ public class RestaurantControllerTest {
         
         when(service.get(1)).thenReturn(mockedRestaurant);
         
-        mockMvc.perform(get("/Restaurant/get/1")
+        mockMvc.perform(get("/restaurant/get/1")
                 .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.id").value(mockedRestaurant.getID()))
@@ -108,7 +108,7 @@ public class RestaurantControllerTest {
         
         when(service.update(eq(id), any(Restaurant.class))).thenReturn(updatedRestaurant);
         
-        mockMvc.perform(put("/Restaurant/update/{id}", id)
+        mockMvc.perform(put("/restaurant/update/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(inputRestaurant)))
             .andExpect(status().isOk())
@@ -124,7 +124,7 @@ public class RestaurantControllerTest {
     @Test
     void testDeleteRestaurant() throws Exception {
         int id = 1;
-        mockMvc.perform(delete("/Restaurant/delete/{id}", id))
+        mockMvc.perform(delete("/restaurant/delete/{id}", id))
             .andExpect(status().isNoContent());
         
         verify(service, times(1)).delete(id);
