@@ -38,8 +38,8 @@ public class AdminControllerTest {
     //Test create
     @Test
     void testCreateAdmin() throws Exception {
-    	Admin inputAdmin = new Admin(1, "NewAdmin", "NewPass");
-    	Admin createdAdmin = new Admin(1, "NewAdmin", "NewPass");
+    	Admin inputAdmin = new Admin( "NewAdmin", "NewPass");
+    	Admin createdAdmin = new Admin( "NewAdmin", "NewPass");
         
         when(service.createAdmin(any(Admin.class))).thenReturn(createdAdmin);
         
@@ -47,7 +47,7 @@ public class AdminControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(inputAdmin)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(createdAdmin.getID()))
+                .andExpect(jsonPath("$.id").value(createdAdmin.getId()))
                 .andExpect(jsonPath("$.username").value(createdAdmin.getUsername()));
         
         verify(service, times(1)).createAdmin(any(Admin.class));

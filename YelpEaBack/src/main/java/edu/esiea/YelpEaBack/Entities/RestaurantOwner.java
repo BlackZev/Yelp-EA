@@ -14,17 +14,15 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class RestaurantOwner extends User {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO) //Identity
-	int id;
+
 	
 	@OneToMany(mappedBy = "restaurateur", cascade = CascadeType.ALL, orphanRemoval = true )
 	private List<Restaurant> restaurants;
 
 	
-	public RestaurantOwner(int id,String username, String password) {
+	public RestaurantOwner(String username, String password) {
 		super(username, password);
-		this.id=id;
+
 		this.restaurants = new ArrayList<>();
 	}
 
@@ -32,8 +30,4 @@ public class RestaurantOwner extends User {
 		return restaurants;
 	}
 	
-    // Getter et Setter pour l'id
-    public int getId() {
-        return id;
-    }
 }

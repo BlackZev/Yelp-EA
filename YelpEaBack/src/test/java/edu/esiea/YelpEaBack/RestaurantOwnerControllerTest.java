@@ -41,8 +41,8 @@ public class RestaurantOwnerControllerTest {
     //Test Create
     @Test
     void testCreateRestaurantOwner() throws Exception {
-        RestaurantOwner inputOwner = new RestaurantOwner(1, "owner1", "pass1");
-        RestaurantOwner createdOwner = new RestaurantOwner(1, "owner1", "pass1");
+        RestaurantOwner inputOwner = new RestaurantOwner( "owner1", "pass1");
+        RestaurantOwner createdOwner = new RestaurantOwner( "owner1", "pass1");
 
         when(service.create(any(RestaurantOwner.class))).thenReturn(createdOwner);
 
@@ -60,8 +60,8 @@ public class RestaurantOwnerControllerTest {
     //Test getAll
     @Test
     void testGetAllRestaurantOwners() throws Exception {
-        RestaurantOwner owner1 = new RestaurantOwner(1, "owner1", "pass1");
-        RestaurantOwner owner2 = new RestaurantOwner(2, "owner2", "pass2");
+        RestaurantOwner owner1 = new RestaurantOwner( "owner1", "pass1");
+        RestaurantOwner owner2 = new RestaurantOwner( "owner2", "pass2");
 
         when(service.getAll()).thenReturn(List.of(owner1, owner2));
 
