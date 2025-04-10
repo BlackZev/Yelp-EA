@@ -32,6 +32,10 @@ public class Rating {
 		
 	}
 	
+    public int getID() {
+    	return id;
+    }
+	
 	public int getValue() {
 		return value;
 	}

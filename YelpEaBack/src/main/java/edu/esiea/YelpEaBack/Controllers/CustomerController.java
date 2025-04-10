@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import edu.esiea.YelpEaBack.Entities.Customer;
 import edu.esiea.YelpEaBack.Services.CustomerService;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/customer")
 public class CustomerController {
 	
@@ -31,18 +33,18 @@ public class CustomerController {
         return service.getAllCustomer();
     }
 	
-	@GetMapping("/{id}")
+	@GetMapping("/get/{id}")
     public ResponseEntity<Customer> getCustomer(@PathVariable int id) {
         return ResponseEntity.ok(service.getCustomerbyId(id));
     }
 	
-	@PostMapping
+	@PostMapping("/create")
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
         Customer createdCustomer = service.createCustomer(customer);
         return ResponseEntity.ok(createdCustomer);
     }
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable int id) {
         service.deleteCustomer(id);
         return ResponseEntity.noContent().build();

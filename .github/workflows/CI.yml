@@ -1,4 +1,6 @@
 name: Java CI with Maven
+permissions:
+  contents: write
 
 on:
   push:
@@ -8,46 +10,227 @@ on:
 
 jobs:
   backend:
-
+    name: Build and Test Backend
     runs-on: ubuntu-latest
 
     steps:
     # checkout
     - uses: actions/checkout@v4
-    
-    # install java 
+
+    # install java
     - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
+
     - name: Build with Maven
-    # package = test puis jar
+      working-directory: YelpEaBack
       run: mvn -B package --file pom.xml
 
-    # install Docker
-    - name: Docker install avec action
-      run: |
-          sudo apt-get update
-          sudo apt-get install -y apt-transport-https ca-certicates curl software-properties-common
-          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-          sudo apt-get update
-          sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-          sudo docker -- version
+    - name: Upload JAR as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: backend-jar
+        path: YelpEaBack/target/*.jar
 
-    # docker build 
-    - name: Docker build
-      run: |
-        cd YelpEaBack
-        docker build -t back .
-    # docker login -> action
-    # run docker push 
+  frontend:
+    name: Build and Test Frontend
+    runs-on: ubuntu-latest
 
-#frontend:
- # install angular 
- # run npm test
- # test selenium
- # docker login -> action
- # run docker push 
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: YelpEaFront/package-lock.json
+
+      - name: Install dependencies
+        working-directory: YelpEaFront
+        run: npm ci
+
+      # - name: Run unit tests
+      #   working-directory: YelpEaFront
+      #   run: npm run test -- --watch=false --browsers=ChromeHeadless
+
+      - name: Build Angular app
+        working-directory: YelpEaFront
+        run: npm run build -- --output-path=dist-app --configuration production
+
+      - name: Upload Angular build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: YelpEaFront/dist-app
+
+  docker-backend:
+    name: Build Docker Image for Backend
+    runs-on: ubuntu-latest
+    needs: backend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download JAR artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-jar
+          path: ./YelpEaBack/build-output
+
+      - name: Rename JAR to app.jar
+        run: |
+          mv ./YelpEaBack/build-output/*.jar ./YelpEaBack/app.jar
+      - name: Build Docker image
+        working-directory: YelpEaBack
+        run: |
+          docker build -t back .
+  docker-frontend:
+    name: Build Docker Image for Frontend
+    runs-on: ubuntu-latest
+    needs: frontend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Angular artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-dist
+          path: ./YelpEaFront/dist-app
+
+      - name: Build Docker image
+        working-directory: YelpEaFront
+        run: docker build -t front .
+
+  create-release-tag:
+    name: Create GitHub Release & Tag
+    runs-on: ubuntu-latest
+    needs: [docker-backend, docker-frontend]
+    outputs:
+      release_tag: ${{ steps.get_version.outputs.tag }}
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Générer un tag basé sur la date et le commit
+        id: get_version
+        run: |
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          DATE=$(date +'%Y-%m-%d')
+          TAG="v${DATE}-${SHORT_SHA}"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+      - name: Créer un tag Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git tag ${{ steps.get_version.outputs.tag }}
+          git push origin ${{ steps.get_version.outputs.tag }}
+      - name: Créer une release GitHub
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.get_version.outputs.tag }}
+
+  build-and-push-images:
+    name: Build and Push Docker Images
+    runs-on: ubuntu-latest
+    needs: [docker-backend, docker-frontend, create-release-tag]
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Download JAR artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-jar
+          path: ./YelpEaBack/build-output
+
+      - name: Move JAR for Docker context
+        run: |
+          mv ./YelpEaBack/build-output/*.jar ./YelpEaBack/app.jar
+      - name: Build & Push Backend Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./YelpEaBack
+          file: ./YelpEaBack/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            blackzeph/java-backend:latest
+            blackzeph/java-backend:${{ needs.create-release-tag.outputs.release_tag }}
+      - name: Download Angular artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-dist
+          path: ./YelpEaFront/dist
+
+      - name: Prepare Docker context
+        run: |
+          mkdir -p ./YelpEaFront/dist-app
+          mv ./YelpEaFront/dist/* ./YelpEaFront/dist-app
+      - name: Build & Push Frontend Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./YelpEaFront
+          file: ./YelpEaFront/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            blackzeph/angular-frontend:latest
+            blackzeph/angular-frontend:${{ needs.create-release-tag.outputs.release_tag }}
+  docker-compose-test:
+    name: Test de l'intégration Docker Compose
+    runs-on: ubuntu-latest
+    needs: [build-and-push-images, create-release-tag]
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker and Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            ca-certificates \
+            curl \
+            gnupg \
+            lsb-release
+          sudo mkdir -p /etc/apt/keyrings
+          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+          echo \
+            "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+            $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+          sudo apt-get update
+          sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+          sudo usermod -aG docker $USER
+          newgrp docker
+      - name: Créer le fichier .env
+        run: |
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+          echo "DB_PSWD=${{ secrets.DB_PSWD }}" >> .env
+      - name: Lancer docker-compose
+        run: docker compose --env-file .env up -d --build
+
+      - name: Vérifier les conteneurs actifs
+        run: docker ps
+
+      - name: Nettoyage
+        if: always()
+        run: docker compose --env-file .env down --volumes
+
+      - name: Supprimer le fichier .env
+        if: always()
+        run: rm -f .env

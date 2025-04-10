@@ -29,7 +29,7 @@ public class Restaurant {
 	
 	
     public Restaurant(String name, String address, String phone, String description, TypeRestauEnum type) {
-        this.name = name;
+    	this.name = name;
         this.address = address;
         this.phone = phone;
         this.description = description;
@@ -38,6 +38,10 @@ public class Restaurant {
     }
     
     // Getters et setters pour les informations du restaurant
+    public int getID() {
+    	return id;
+    }
+    
     public String getName() {
         return name;
     }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.esiea.YelpEaBack.Entities.Restaurant;
 import edu.esiea.YelpEaBack.Entities.RestaurantOwner;
 import edu.esiea.YelpEaBack.Services.RestaurantOwnerService;
 
 @RestController
-@RequestMapping("/RestaurantOwner")
+@CrossOrigin(origins = "*")
+@RequestMapping("/restaurantOwner")
 public class RestaurantOwnerController {
 	
 	@Autowired
@@ -39,7 +40,7 @@ public class RestaurantOwnerController {
         return service.getAll();
     }
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteRestaurantOwner(@PathVariable int id) {
         service.delete(id);
         return ResponseEntity.noContent().build();

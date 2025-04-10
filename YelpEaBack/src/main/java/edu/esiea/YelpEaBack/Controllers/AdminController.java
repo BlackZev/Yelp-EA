@@ -2,6 +2,7 @@ package edu.esiea.YelpEaBack.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,8 +14,10 @@ import edu.esiea.YelpEaBack.Entities.Admin;
 import edu.esiea.YelpEaBack.Services.AdminService;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/paneladmin")
 public class AdminController {
+	
 	
 	@Autowired
 	private final AdminService service;
@@ -23,13 +26,13 @@ public class AdminController {
 		this.service = service;
 	}
 	
- @PostMapping
+ @PostMapping("/create")
  public ResponseEntity<Admin> createAdmin(@RequestBody Admin admin){
 	 Admin createdAdmin = service.createAdmin(admin);
 	 return ResponseEntity.ok(createdAdmin);
  }
  
- @DeleteMapping("/{id}")
+ @DeleteMapping("delete/{id}")
  public ResponseEntity<Void> deleteAdmin(@PathVariable int id){
 	 service.deleteAdmin(id);
 	 return ResponseEntity.noContent().build();
