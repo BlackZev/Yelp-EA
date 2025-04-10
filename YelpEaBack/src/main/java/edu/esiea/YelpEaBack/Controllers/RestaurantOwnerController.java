@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.esiea.YelpEaBack.Entities.Restaurant;
 import edu.esiea.YelpEaBack.Entities.RestaurantOwner;
 import edu.esiea.YelpEaBack.Services.RestaurantOwnerService;
 
